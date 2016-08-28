@@ -10,7 +10,13 @@ Vagrant.configure("2") do |config|
       "--memory", "256",
     ]
   end
-  config.vm.provision "shell", path: "puppet/installation-script.sh"
+  # config.vm.provision "shell", path: "puppet/installation-script.sh"
+
+  config.vm.provision :shell do |shell|
+  shell.path = "puppet/installation-script.sh"
+  # uncomment the next line if you want to install the librarian-ruby gem instead the package
+  #  shell.args = "-g"
+  end
 
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = "puppet/manifests"
